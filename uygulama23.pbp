@@ -1,0 +1,29 @@
+TRISB=0
+TRISD=0
+portb=0
+portd=0
+
+i var byte
+j var byte
+j=5
+k var byte
+
+label:
+   for i=1 to 9
+      write i,j
+      j=j+5
+   next i
+   for i=1 to 9
+      read i,k
+      portb=i
+      if k<10 then
+         portd=k
+      else
+         portd=k+(k dig 1)*6
+      endif
+      pause 1000 
+   next i
+  
+END
+
+

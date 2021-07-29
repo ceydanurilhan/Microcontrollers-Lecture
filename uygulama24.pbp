@@ -1,0 +1,49 @@
+include "lcdtanimlamalar.pbp"
+
+TRISA=%111111
+TRISB=0
+symbol ileri=PortA.0
+symbol geri=PortA.1
+symbol saga=PortA.2
+symbol sola=PortA.3
+symbol solmotorsaat=PortB.0
+symbol solmotorsaattersi=PortB.1
+symbol sagmotorsaat=PortB.2
+symbol sagmotorsaattersi=PortB.3
+
+lcdout $fe,$40,12,18,18,23,18,16,16,0
+lcdout $fe,$48,6,9,9,29,9,1,1,0
+lcdout $fe,$50,4,14,21,4,4,4,4,0
+lcdout $fe,$58,4,4,4,4,21,14,4,0
+
+label:
+  while ileri=0
+      lcdout $fe,1,"Robot ileri gidiyor",2
+      solmotorsaat=0:solmotorsaattersi=1:sagmotorsaat=1:sagmotorsaattersi=0
+      pause 100
+  wend
+  
+  while geri=0
+      lcdout $fe,1,"Robot geri gidiyor",3
+      solmotorsaat=1:solmotorsaattersi=0:sagmotorsaat=0:sagmotorsaattersi=1
+      pause 100
+  wend
+  
+  while saga=0
+      lcdout $fe,1,"Robot saga donuyor",0
+      solmotorsaat=0:solmotorsaattersi=1:sagmotorsaat=0:sagmotorsaattersi=1
+      pause 100
+  wend
+  
+  while sola=0
+      lcdout $fe,1,"Robot sola donuyor",1
+      solmotorsaat=1:solmotorsaattersi=0:sagmotorsaat=1:sagmotorsaattersi=0
+      pause 100
+  wend
+  solmotorsaat=0:solmotorsaattersi=0:sagmotorsaat=0:sagmotorsaattersi=0
+  lcdout $fe,1,"duruyor"
+  pause 100
+goto label
+
+
+

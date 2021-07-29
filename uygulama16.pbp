@@ -1,0 +1,158 @@
+include "lcdtanimlamalar.pbp"
+include "terminaltanimlamalar.pbp"
+
+
+lcdout $fe,$40,$00,$0E,$1F,$1F,$1F,$0E 'lcdout $fe,$40,0,14,31,31,31,14,0,0 taþ
+lcdout $fe,$48,27,27,17,10,4,10,17,0   'makas
+lcdout $fe,$50,7,14,28,14,7,14,28      'kaðýt
+
+ i var byte
+ j var byte
+ x var byte
+ hserout ["tas: t, makas: m, kagit :k giriniz",13,10]
+ pause 1000
+ 
+'**************versiyon 1.0**************** 
+'label:
+'    hserout ["Birinci oyuncu hamlesini girsin",13,10]
+'    hserin 5000,ikaz1,[i]
+'    if i!="t" and i!="m" and i!="k" then 
+'        hserout ["gecersiz hamle girdiniz. t,m,k giriniz",13,10]:goto label 
+'    else
+'        lcdout $fe,1,"Ilk hamle girildi"
+'    endif    
+'         devam:
+'    hserout ["Ikincici oyuncu hamlesini girsin",13,10]
+'    hserin 5000,ikaz2,[j]
+'    if j!="t" and j!="m" and j!="k" then 
+'        hserout ["gecersiz hamle girdiniz. t,m,k giriniz",13,10] :goto devam
+'    else
+'        lcdout $fe,1,"Ikinci hamle girildi"
+'    endif 
+'    goto karsilastir
+'goto label
+
+
+'karsilastir:
+'     if i="t" and j="m" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",0," Ikinci:",1
+'        lcdout $fe,$C0,"Ilk oyuncu kazandi"
+'     endif
+'     if i="m" and j="t" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",1," Ikinci:",0
+'        lcdout $fe,$C0,"Ikinci oyuncu kazandi"
+'     endif
+'     if i="t" and j="k" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",0," Ikinci:",2
+'        lcdout $fe,$C0,"Ikinci oyuncu kazandi"
+'     endif
+'     if i="k" and j="t" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",2," Ikinci:",0
+'        lcdout $fe,$C0,"Ilk oyuncu kazandi"
+'     endif
+'     if i="m" and j="k" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",1," Ikinci:",2
+'        lcdout $fe,$C0,"Ilk oyuncu kazandi"
+'     endif
+'     if i="k" and j="m" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",2," Ikinci:",1
+'        lcdout $fe,$C0,"Ikinci oyuncu kazandi"
+'     endif
+'     if i="k" and j="k" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",2," Ikinci:",2
+'        lcdout $fe,$C0,"Berabere"
+'     endif
+'     if i="t" and j="t" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",0," Ikinci:",0
+'        lcdout $fe,$C0,"Berabere"
+'     endif
+'     if i="m" and j="m" then 
+'        lcdout $fe,1
+'        lcdout "Birinci:",1," Ikinci:",1
+'        lcdout $fe,$C0,"Berabere"
+'     endif
+'     hserout ["oyunu tekrar baslatmak icin -space- tusuna basiniz",13,10]
+'     hserin [wait(" ")]
+'goto label
+
+'ikaz1:
+'     hserout ["Cok bekledik, artik hamleni giriver",13,10]
+'goto label
+'ikaz2:
+'     hserout ["Cok bekledik, artik hamleni giriver",13,10]
+'goto devam
+
+
+'**************versiyon 2.0****************
+ label:
+   if x=0 then hserout ["Birinci oyuncu hamlesini girsin",13,10]
+   if x=1 then hserout ["Ikinci oyuncu hamlesini girsin",13,10]
+    hserin 5000,ikaz1,[j]
+    if j!="t" and j!="m" and j!="k" then hserout ["gecersiz hamle girdiniz. t,m,k giriniz",13,10]:goto label
+    if x=0 then i=j
+    if x=1 then x=0:goto karsilastir
+    x=x+1
+goto label
+
+karsilastir:
+     if i="t" and j="m" then 
+        lcdout $fe,1
+        lcdout "Birinci:",0," Ikinci:",1
+        lcdout $fe,$C0,"Ilk oyuncu kazandi"
+     endif
+     if i="m" and j="t" then 
+        lcdout $fe,1
+        lcdout "Birinci:",1," Ikinci:",0
+        lcdout $fe,$C0,"Ikinci oyuncu kazandi"
+     endif
+     if i="t" and j="k" then 
+        lcdout $fe,1
+        lcdout "Birinci:",0," Ikinci:",2
+        lcdout $fe,$C0,"Ikinci oyuncu kazandi"
+     endif
+     if i="k" and j="t" then 
+        lcdout $fe,1
+        lcdout "Birinci:",2," Ikinci:",0
+        lcdout $fe,$C0,"Ilk oyuncu kazandi"
+     endif
+     if i="m" and j="k" then 
+        lcdout $fe,1
+        lcdout "Birinci:",1," Ikinci:",2
+        lcdout $fe,$C0,"Ilk oyuncu kazandi"
+     endif
+     if i="k" and j="m" then 
+        lcdout $fe,1
+        lcdout "Birinci:",2," Ikinci:",1
+        lcdout $fe,$C0,"Ikinci oyuncu kazandi"
+     endif
+     if i="k" and j="k" then 
+        lcdout $fe,1
+        lcdout "Birinci:",2," Ikinci:",2
+        lcdout $fe,$C0,"Berabere"
+     endif
+     if i="t" and j="t" then 
+        lcdout $fe,1
+        lcdout "Birinci:",0," Ikinci:",0
+        lcdout $fe,$C0,"Berabere"
+     endif
+     if i="m" and j="m" then 
+        lcdout $fe,1
+        lcdout "Birinci:",1," Ikinci:",1
+        lcdout $fe,$C0,"Berabere"
+     endif
+     hserout ["oyunu tekrar baslatmak icin -space- tusuna basiniz",13,10]
+     hserin [wait(" ")]
+goto label
+
+ikaz1:
+     hserout ["Cok bekledik, artik hamleni giriver",13,10]
+goto label
+

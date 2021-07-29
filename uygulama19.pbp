@@ -1,0 +1,68 @@
+TRISE=%111
+TRISB=0
+TRISC=0
+TRISD=0
+
+PortB=0
+PortC=0
+PortD=0
+
+ADCON1=7  'tüm analog pin leri digitale çevirdik
+
+i var byte   'sayý 1
+j var byte   'sayý 2
+t var byte   'toplama sonucu
+x var byte
+y var byte
+
+symbol sayi1buton=PortE.0
+symbol sayi2buton=PortE.1
+symbol toplambuton=PortE.2
+
+label:
+
+    while sayi1buton=0
+         if i<9 then 
+           i=i+1
+         else
+           i=0
+         endif
+         
+         portb=i
+        while sayi1buton=0
+        wend
+    wend
+           
+    while sayi2buton=0
+         if j<9 then 
+           j=j+1
+         else
+           j=0
+         endif
+         
+         portc=j
+        while sayi2buton=0
+        wend
+    wend
+    
+    if toplambuton=0 then gosub topla
+   
+goto label
+
+topla:
+   t=i+j
+   
+   if t<=9 then 
+      portd=t      'toplam tek basamaksa
+   else           'toplam çift basamaksa
+      x=t dig 0   'çift basamaklý t nin birler basamaðýný x'e atar
+      y=t dig 1   'çift basamaklý t nin onlar basamaðýný y'ye atar
+'portd=t+6  '10 lu sayýlarda
+'portd=t+12  '20 li sayýlarda
+'portd=t+18  '30 lu sayýlarda
+      portd=t+y*6
+   endif
+    
+return
+
+

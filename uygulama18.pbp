@@ -1,0 +1,19 @@
+TRISB=%10000000
+PortB=0
+i var byte
+symbol buton=PortB.7
+
+label:
+      
+     while buton=0
+         if i<9 then 
+            i=i+1
+         else 
+            i=0
+         endif
+         portb=i
+         while buton=0
+         wend
+     wend
+     
+goto label
