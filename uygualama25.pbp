@@ -1,0 +1,9 @@
+symbol lamba=PortC.1
+i var byte 
+
+label:
+   for i=0 to 255
+   pwm lamba,i,10
+   pause 1000
+   next i
+goto label

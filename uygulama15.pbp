@@ -1,0 +1,87 @@
+            include "lcdtanimlamalar.pbp"
+
+DEFINE HSER_RCSTA 90h
+DEFINE HSER_TXSTA 24h
+DEFINE HSER_BAUD 9600
+DEFINE HSER_CLROERR 1
+
+
+i var byte  'saniye
+j var byte  'dakika
+k var byte  'saat
+x var byte
+y var byte
+z var byte
+n var  byte
+hserout ["Saati Ayarlamak Icin Space e basiniz",13,10]
+
+'***********ayarlama denemesi**************************
+'deneme:
+'while k<8 
+'  while i<10
+'           hserin 1000,devam,[dec j]
+'           i=j
+'           hserin [dec k]
+'           hserout ["yeni deger i:",dec j,13,10]
+'           hserout ["yeni deðer k:",dec k,13,10] 
+'      devam:
+'          hserout ["i:",dec i,13,10]
+'          hserout ["k:",dec k,13,10]
+'             i=i+1
+' wend
+' i=0
+' k=k+1
+' wend
+' k=0
+ 
+'goto deneme
+
+
+'******************ayarlanablir saat uygulamasý**************
+label:
+       k=0
+ while k<=23         'saati çevir
+       j=0
+    while j<=59      'dakikayý çevir
+       i=0
+       while i<=59   'saniyeyi çevir
+          git:
+          '******lcd de ssaati gösterme
+           if k<10 and j<10 and i<10 then lcdout $fe,1,"0",#k,":","0",#j,":","0",#i
+           if k<10 and j<10 and i>=10 then lcdout $fe,1,"0",#k,":","0",#j,":",#i
+           if k<10 and j>=10 and i<10 then lcdout $fe,1,"0",#k,":",#j,":","0",#i
+           if k<10 and j>=10 and i>=10 then lcdout $fe,1,"0",#k,":",#j,":",#i
+           if k>=10 and j<10 and i<10 then lcdout $fe,1,#k,":","0",#j,":","0",#i
+           if k>=10 and j<10 and i>=10 then lcdout $fe,1,#k,":","0",#j,":",#i
+           if k>=10 and j>=10 and i<10 then lcdout $fe,1,#k,":",#j,":","0",#i
+           if k>=10 and j>=10 and i>=10 then lcdout $fe,1,#k,":",#j,":",#i
+           '*****saniyeyi arttýrma 
+            i=i+1
+           '*****terminalden giriþ yapýldýmý kontrol eder. giriþ boþulsa alltan, deðiilse git döngüsünden devam eder 
+                           hserin 1000,git,[x]
+                           if x!=" " then 
+                               hserout ["Ayar icin bosluk tusuna bas demedik mi?",13,10]
+                               goto git      
+                           else
+                               hserout ["Saati giriniz:",13,10]
+                               hserin [dec y]
+                               hserout ["Yeni saat degeri:",dec y,13,10]
+                               hserout ["Dakikayi giriniz:",13,10]
+                               hserin [dec z]
+                               hserout ["Yeni dakika degeri:",dec z,13,10]
+                               hserout ["Saniyeyi giriniz:",13,10]
+                               hserin [dec n]
+                               hserout ["Yeni saniye degeri:",dec n,13,10]             
+                           endif
+                               k=y
+                               j=z
+                               i=n        
+       wend
+          j=j+1
+    wend
+          k=k+1
+ wend  
+       
+goto label
+
+
