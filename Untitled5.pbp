@@ -1,0 +1,33 @@
+       
+       TRISB =%00000100        'TRISB=% B7,B6,B5,B4,B3,B2,B1,B0'
+                               'TRISB=0 veya TRISB=$00
+                               'PortB=0                 
+                               ' PortB.0=0
+                               ' PortB.1=0
+       
+       SYMBOL sari=PortB.0
+       SYMBOL yesil=PortB.1
+       SYMBOL sapsari=PortB.2
+       i VAR BYTE    'bit 0-1
+                     'byte 0-255
+                     'word 0-65562
+       
+       sari=0 : yesil=0
+       
+       neolsun:
+               'sari=1 : yesil=0 : PAUSE 1000
+               'sari=0 : yesil=1 : PAUSE 1000
+               
+               'IF sapsari=0 THEN i=i+1
+               'IF i=1 THEN sari=1
+               'IF i=2 THEN sari=0 : i=0
+               WHILE sapsari=0
+                    WHILE sapsari=0
+                    WEND
+                    i=i+1
+               WEND
+       
+               IF i=1 THEN sari=1
+               IF i=2 THEN sari=0 : i=0
+               
+       GOTO neolsun

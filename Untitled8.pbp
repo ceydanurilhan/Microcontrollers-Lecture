@@ -1,0 +1,16 @@
+       TRISB = %00000000
+       TRISC = %00000001
+       portb=0
+       SYMBOL buton= PortC.0
+       i VAR BYTE
+       
+       basla:
+            WHILE buton=1
+                  i=i+1
+                  portb=i
+                  WHILE buton=1
+                  WEND
+            WEND
+            
+       
+       GOTO basla

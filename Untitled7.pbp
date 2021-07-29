@@ -1,0 +1,18 @@
+           TRISB =%00000000   'tüm ledler çýkýþ olarak atandý
+           TRISC =%00000001   'buton giriþ olarak atandý
+           portb=0    'tüm ledler sönük baþlasýn
+
+           SYMBOL buton=PortC.0
+           i VAR BYTE 'max 255 deðerini alýr
+
+basla:
+     WHILE buton=1 'butona basýldýðý müddetçe. Çünkü default olarak 0 (pulldown yapýsý)
+          portb = portb + 1
+          PAUSE 1000
+     WEND 
+     portb=0
+
+
+
+
+GOTO basla

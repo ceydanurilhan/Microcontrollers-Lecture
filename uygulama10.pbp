@@ -1,0 +1,16 @@
+    TRISB=%00000000
+    TRISC=%00000001
+    
+    portb=0
+    symbol buton=PortC.0
+    i var byte
+    
+    basla:
+         WHILe buton=1
+             i=i+1
+             portb=i
+             pause 1000
+         wend
+         i=0
+         portb=i
+    goto basla

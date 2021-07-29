@@ -1,0 +1,16 @@
+include "lcdtanimlamalar.pbp"
+DEFINE HSER_RCSTA 90h
+DEFINE HSER_TXSTA 24h
+DEFINE HSER_BAUD 9600
+DEFINE HSER_CLROERR 1
+
+i var byte
+j var byte
+
+
+label:
+     hserin [skip 3,str i\2]
+     hserout [str i\2]
+     
+goto label
+

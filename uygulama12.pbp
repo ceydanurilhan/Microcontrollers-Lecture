@@ -1,0 +1,20 @@
+include "lcdtanimlamalar.pbp"
+'************DEGISKEN TANIMLAMALARI********
+i var byte
+j var byte
+'******************************************
+j=1
+label:
+   while i<=20
+         lcdout $fe,1,#i
+         if j!=21 then lcdout $fe,$C0,#j
+         j=j+2
+         i=i+2
+         pause 500
+   wend
+   
+
+
+goto label
+
+
